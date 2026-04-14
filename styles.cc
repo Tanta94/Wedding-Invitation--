@@ -1,168 +1,211 @@
-/* Custom Styles for Wedding Invitation */
+/* Minimalist Wedding Invitation Styles */
 
 body {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
-    color: #333;
-}
-
-h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
-.hero-section {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1920x1080?text=Wedding+Background') no-repeat center center;
-    background-size: cover;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.hero {
+    text-align: center;
+    padding: 50px 20px;
     position: relative;
 }
 
-.overlay {
+.hearts {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
-    height: 100%;
-    background: rgba(255, 192, 203, 0.3); /* Soft pink overlay */
 }
 
-.couple-photo {
-    border: 5px solid #fff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+.heart {
+    font-size: 2rem;
+    color: #ff69b4;
+    animation: float 3s ease-in-out infinite;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.heart:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.heart:nth-child(3) {
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
     margin: 20px 0;
+    color: #fff;
 }
 
-.btn-primary {
-    background-color: #d4af37; /* Gold */
-    border-color: #d4af37;
-    transition: background-color 0.3s ease;
+.subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: #ccc;
 }
 
-.btn-primary:hover {
-    background-color: #b8860b;
-    border-color: #b8860b;
+.event-info p {
+    font-size: 1.2rem;
+    margin: 10px 0;
 }
 
-.btn-secondary {
-    background-color: #6c757d;
-    border-color: #6c757d;
+.map-container {
+    margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #ff69b4;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #ff1493;
+}
+
+.countdown {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.countdown h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#timer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .time-box {
-    background: #f8f9fa;
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     padding: 20px;
-    margin: 0 10px;
+    margin: 10px;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    min-width: 80px;
 }
 
 .time-box span {
     font-size: 2rem;
     font-weight: bold;
-    color: #d4af37;
+    color: #ff69b4;
 }
 
 .time-box p {
-    margin: 0;
+    margin: 5px 0 0;
     font-size: 0.9rem;
     text-transform: uppercase;
 }
 
-/* Slideshow */
-.slideshow-container {
-    max-width: 1000px;
-    position: relative;
-    margin: auto;
+.message-section {
+    margin: 50px 0;
 }
 
-.slide {
-    display: none;
+.message-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
 }
 
-.slide img {
-    width: 100%;
-    height: auto;
+#messageForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto 40px;
 }
 
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    margin-top: -22px;
-    padding: 16px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
+#messageForm input,
+#messageForm textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
 }
 
-.next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
+#messageForm textarea {
+    resize: vertical;
+    min-height: 100px;
 }
 
-.prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
+.messages-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.dot {
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
+.message-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    max-width: 300px;
+    animation: popIn 0.5s ease-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.active, .dot:hover {
-    background-color: #717171;
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
-.fade {
-    animation-name: fade;
-    animation-duration: 1.5s;
+.message-card h3 {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+    color: #ff69b4;
 }
 
-@keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
+.message-card p {
+    margin: 0;
+    font-size: 1rem;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .hero-section {
-        height: 80vh;
+    h1 {
+        font-size: 3rem;
     }
 
     .time-box {
-        margin: 5px;
-        padding: 10px;
+        min-width: 60px;
+        padding: 15px;
     }
 
     .time-box span {
         font-size: 1.5rem;
     }
 
-    .display-4 {
-        font-size: 2.5rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .d-flex {
-        flex-direction: column;
-    }
-
-    .time-box {
-        margin: 10px 0;
+    .message-card {
+        max-width: 100%;
     }
 }
