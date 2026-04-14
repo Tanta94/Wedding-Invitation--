@@ -1,3 +1,6 @@
+// Connect to Socket.io
+const socket = io();
+
 // Countdown Timer
 function updateCountdown() {
     const weddingDate = new Date('April 23, 2026 17:00:00').getTime();
@@ -15,61 +18,47 @@ function updateCountdown() {
         document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
         document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
     } else {
-        document.getElementById('timer').innerHTML = '<p>The wedding has started!</p>';
+        document.getElementById('timer').innerHTML = '<p>The wedding has begun!</p>';
     }
 }
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// Slideshow
-let slideIndex = 1;
-showSlides(slideIndex);
+// Handle message form submission
+document.getElementById('messageForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
 
-function changeSlide(n) {
-    showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-    showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("slide");
-    let dots = document.getElementsByClassName("dot");
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+    if (name && email && message) {
+        socket.emit('new message', { name, email, message });
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('message').value = '';
     }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[slideIndex-1].style.display = "block";
-    dots[slideIndex-1].className += " active";
-}
-
-// Auto slideshow
-setInterval(() => {
-    changeSlide(1);
-}, 5000);
-
-// Handle RSVP form submission (simulate modal)
-document.querySelector('#rsvp form').addEventListener('submit', function(e) {
-    // Note: In a real setup, Formspree handles the submission and email.
-    // For demo, show modal after submit.
-    setTimeout(() => {
-        $('#rsvpModal').modal('show');
-    }, 1000);
 });
 
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
+// Load existing messages
+socket.on('load messages', (messages) => {
+    const container = document.getElementById('messages');
+    container.innerHTML = '';
+    messages.forEach(addMessageCard);
 });
+
+// Add new message
+socket.on('new message', (data) => {
+    addMessageCard(data);
+});
+
+function addMessageCard(data) {
+    const container = document.getElementById('messages');
+    const card = document.createElement('div');
+    card.className = 'message-card';
+    card.innerHTML = `
+        <h3>${data.name}</h3>
+        <p>${data.message}</p>
+    `;
+    container.appendChild(card);
+}
